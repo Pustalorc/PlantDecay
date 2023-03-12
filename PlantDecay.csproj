@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net481</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Company>Pustalorc</Company>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+        <LangVersion>11</LangVersion>
+        <RootNamespace>Pustalorc.Plugins.PlantDecay</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="OpenMod.UnityEngine.Redist" Version="2019.4.10"/>
+        <PackageReference Include="OpenMod.Unturned.Redist" Version="3.22.21.4"/>
+        <PackageReference Include="Pustalorc.AsyncTaskDispatcher" Version="1.1.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Rocket.API">
+            <HintPath>Libraries\Rocket.API.dll</HintPath>
+        </Reference>
+        <Reference Include="Rocket.Core">
+            <HintPath>Libraries\Rocket.Core.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+</Project>
