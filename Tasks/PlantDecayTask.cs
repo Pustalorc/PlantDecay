@@ -6,12 +6,13 @@ using SDG.Unturned;
 
 namespace Pustalorc.Plugins.PlantDecay.Tasks;
 
+public delegate void PlantDecayCompleted(PlantDecayTask task);
+
 public sealed class PlantDecayTask : QueueableTask
 {
-    public delegate void PlantDecayCompleted(uint barricadeInstanceId);
-
     public event PlantDecayCompleted? OnDecayCompleted;
-    private BarricadeDrop Drop { get; }
+
+    internal BarricadeDrop Drop { get; }
 
     internal PlantDecayTask(BarricadeDrop drop, long timeToDecay) : base(timeToDecay)
     {
@@ -23,7 +24,7 @@ public sealed class PlantDecayTask : QueueableTask
         if (BarricadeManager.tryGetRegion(Drop.model, out var x, out var y, out var plant, out _))
             TaskDispatcher.QueueOnMainThread(() => BarricadeManager.destroyBarricade(Drop, x, y, plant));
 
-        OnDecayCompleted?.Invoke(Drop.instanceID);
+        OnDecayCompleted?.Invoke(this);
         return Task.CompletedTask;
     }
 }

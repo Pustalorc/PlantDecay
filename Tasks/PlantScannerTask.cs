@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Pustalorc.Libraries.AsyncThreadingUtils.TaskQueue.QueueableTasks;
 using Pustalorc.Plugins.AsynchronousTaskDispatcher.Dispatcher;
 using Rocket.API;
+using Rocket.Core.Logging;
 using SDG.Unturned;
 
 namespace Pustalorc.Plugins.PlantDecay.Tasks;
@@ -22,16 +24,16 @@ internal sealed class PlantScannerTask : QueueableTask
         IsRepeating = true;
     }
 
-    public override void ResetTimestamp()
+    public void RestartTask()
     {
         IsCancelled = false;
-        base.ResetTimestamp();
+        ResetTimestamp();
     }
 
     protected override Task Execute(CancellationToken token)
     {
         var plantsToDecay = BarricadeManager.regions.Cast<BarricadeRegion>().SelectMany(k => k.drops).ToList()
-            .Where(k => k.interactable is InteractableFarm { IsFullyGrown: true });
+            .Where(k => k.interactable is InteractableFarm { IsFullyGrown: true }).ToList();
 
         var configuration = Plugin.Configuration.Instance;
         foreach (var plantToDecay in plantsToDecay)
@@ -53,8 +55,9 @@ internal sealed class PlantScannerTask : QueueableTask
         return Task.CompletedTask;
     }
 
-    private void DecayCompleted(uint barricadeInstanceId)
+    private void DecayCompleted(PlantDecayTask task)
     {
-        DecayTasks.Remove(barricadeInstanceId);
+        task.OnDecayCompleted -= DecayCompleted;
+        DecayTasks.Remove(task.Drop.instanceID);
     }
 }

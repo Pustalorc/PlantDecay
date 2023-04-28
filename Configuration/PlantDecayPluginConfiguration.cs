@@ -13,6 +13,7 @@ public sealed class PlantDecayPluginConfiguration : IRocketPluginConfiguration
 
     public PlantDecayPluginConfiguration()
     {
+        ScannerIntervalMs = 15000;
         DefaultDecayTime = 3600;
         CustomDecays = new List<CustomDecayTime>();
     }

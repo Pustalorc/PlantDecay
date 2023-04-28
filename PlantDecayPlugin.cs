@@ -18,14 +18,14 @@ public sealed class PlantDecayPlugin : RocketPlugin<PlantDecayPluginConfiguratio
 
     protected override void Load()
     {
-        ScannerTask.ResetTimestamp();
+        ScannerTask.RestartTask();
 
         if (!Level.isLoaded)
             Level.onPostLevelLoaded += OnLevelLoaded;
         else
             OnLevelLoaded(0);
 
-        Logger.Log("Plant Decay Plugin v1.0.1, by Pustalorc has been loaded!");
+        Logger.Log("Plant Decay Plugin v1.0.2, by Pustalorc has been loaded!");
     }
 
     private void OnLevelLoaded(int level)
@@ -36,7 +36,6 @@ public sealed class PlantDecayPlugin : RocketPlugin<PlantDecayPluginConfiguratio
     protected override void Unload()
     {
         ScannerTask.Cancel();
-
-        Logger.Log("Plant Decay Plugin v1.0.1, by Pustalorc has been unloaded!");
+        Logger.Log("Plant Decay Plugin v1.0.2, by Pustalorc has been unloaded!");
     }
 }
