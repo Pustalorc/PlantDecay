@@ -5,7 +5,7 @@ using Rocket.API;
 namespace Pustalorc.Plugins.PlantDecay.Configuration;
 
 [Serializable]
-public class PlantDecayPluginConfiguration : IRocketPluginConfiguration
+public sealed class PlantDecayPluginConfiguration : IRocketPluginConfiguration
 {
     public long ScannerIntervalMs { get; set; }
     public long DefaultDecayTime { get; set; }

@@ -21,9 +21,7 @@ public sealed class PlantDecayTask : QueueableTask
     protected override Task Execute(CancellationToken token)
     {
         if (BarricadeManager.tryGetRegion(Drop.model, out var x, out var y, out var plant, out _))
-        {
             TaskDispatcher.QueueOnMainThread(() => BarricadeManager.destroyBarricade(Drop, x, y, plant));
-        }
 
         OnDecayCompleted?.Invoke(Drop.instanceID);
         return Task.CompletedTask;

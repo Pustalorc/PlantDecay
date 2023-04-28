@@ -5,15 +5,15 @@
         <Nullable>enable</Nullable>
         <Company>Pustalorc</Company>
         <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <FileVersion>1.0.1</FileVersion>
         <LangVersion>11</LangVersion>
         <RootNamespace>Pustalorc.Plugins.PlantDecay</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="OpenMod.UnityEngine.Redist" Version="2019.4.10"/>
-        <PackageReference Include="OpenMod.Unturned.Redist" Version="3.22.21.4"/>
-        <PackageReference Include="Pustalorc.AsyncTaskDispatcher" Version="1.1.0"/>
+        <PackageReference Include="OpenMod.UnityEngine.Redist" Version="2020.3.38" />
+        <PackageReference Include="OpenMod.Unturned.Redist" Version="3.23.5" />
+        <PackageReference Include="Pustalorc.AsyncTaskDispatcher" Version="1.2.0" />
     </ItemGroup>
 
     <ItemGroup>

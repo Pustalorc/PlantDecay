@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ using SDG.Unturned;
 
 namespace Pustalorc.Plugins.PlantDecay.Tasks;
 
-public sealed class PlantScannerTask : QueueableTask
+internal sealed class PlantScannerTask : QueueableTask
 {
     private PlantDecayPlugin Plugin { get; }
     private Dictionary<uint, PlantDecayTask> DecayTasks { get; }
@@ -31,11 +30,8 @@ public sealed class PlantScannerTask : QueueableTask
 
     protected override Task Execute(CancellationToken token)
     {
-        var plantsToDecay = BarricadeManager.regions.Cast<BarricadeRegion>().SelectMany(k => k.drops).Where(k =>
-            k.interactable is InteractableFarm
-            {
-                IsFullyGrown: true
-            });
+        var plantsToDecay = BarricadeManager.regions.Cast<BarricadeRegion>().SelectMany(k => k.drops).ToList()
+            .Where(k => k.interactable is InteractableFarm { IsFullyGrown: true });
 
         var configuration = Plugin.Configuration.Instance;
         foreach (var plantToDecay in plantsToDecay)
